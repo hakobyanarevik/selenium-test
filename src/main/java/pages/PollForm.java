@@ -27,22 +27,43 @@ public class PollForm {
 
 
 
-	private List<WebElement> optionsList() {
-		List<WebElement> radioList = webDriver.findElements(By.cssSelector("tr .pst-answer-row-table-tr"));
-		return radioList;
+	public void selectAnswerForQuestion1And4ByIndex(int index) {
+		List<WebElement> radioList = webDriver.findElements(By.cssSelector(".pst-answer-row-table-tr"));
+		radioList.get(index).click();
 	}
 
-	public void selectOptionsByIndex(int index) {
-		optionsList().get(index);
-	}
-
-	public void selectOptionInSelect(String option) {
+	public void selectAnswerForQuestion2(String option) {
 		Select select = new Select(webDriver.findElement(By.cssSelector("select[id='answer_id']")));
 		select.selectByVisibleText(option);
 	}
 
-	public void selectImgByIndex(int index) {
-		webDriver.findElements(By.cssSelector(".question-image")).get(index).click();
+	public void selectAnswerForQuestion3and5() {
+		List<WebElement> elements = webDriver.findElements(By.cssSelector("span .question-image"));
+		elements.get(elements.size() - 1).click();
+	}
+
+	public void selectAnswerForQuestion6(String rowIndex, int radioIndex) {
+		String selector = String.format("#question-79368 [data-pst-answer-index = %s] > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) input", rowIndex);
+		webDriver.findElements(By.cssSelector(selector)).get(radioIndex).click();
+	}
+
+	public void selectAnswerForQuestion7(String rowIndex, int radioIndex) {
+		String selector = String.format("#question-79371 [data-pst-answer-index = %s] > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) input", rowIndex);
+		webDriver.findElements(By.cssSelector(selector)).get(radioIndex).click();
+	}
+
+	public void selectAnswerForQuestion8(int index, String option) {
+		WebElement element = webDriver.findElements(By.cssSelector("#question-79370 > div .ps-answer select")).get(index);
+
+		Select select = new Select(element);
+		select.selectByVisibleText(option);
+	}
+
+	public void selectAnswerForQuestion9(int index, String option) {
+		WebElement element = webDriver.findElements(By.cssSelector("#question-79369 > div .ps-answer select")).get(index);
+
+		Select select = new Select(element);
+		select.selectByVisibleText(option);
 	}
 
 	public void clickButton() {
