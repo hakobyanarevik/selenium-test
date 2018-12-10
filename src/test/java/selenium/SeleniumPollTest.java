@@ -1,6 +1,7 @@
 package selenium;
 
 import base.*;
+import org.testng.*;
 import org.testng.annotations.*;
 import pages.*;
 
@@ -12,19 +13,19 @@ public class SeleniumPollTest extends SeleniumBaseTest {
 	@Test
 	public void pollTest() {
 		PollForm form = new PollForm(getWebDriver());
-		form.clickButton();
+		form.clickSubmitButton();
 
 		// poll page
 		form = new PollForm(getWebDriver());
 		form.selectAnswerForQuestion1And4ByIndex(2);
-		form.selectAnswerForQuestion2("Ansver B");
+		form.selectAnswerForQuestion2(3);
 		form.selectAnswerForQuestion3and5();
 		// click submit button
-		form.clickButton();
+		form.clickSubmitButton();
 
 		// result page
 		form = new PollForm(getWebDriver());
-		form.clickButton();
+		form.clickContinueButton();
 
 		// next poll
 		form = new PollForm(getWebDriver());
@@ -32,19 +33,52 @@ public class SeleniumPollTest extends SeleniumBaseTest {
 		form.selectAnswerForQuestion1And4ByIndex(1);
 		form.selectAnswerForQuestion3and5();
 		form.selectAnswerForQuestion3and5();
-		form.clickButton();
+		form.clickSubmitButton();
 
 		// result page
 		form = new PollForm(getWebDriver());
-		form.clickButton();
+		form.clickContinueButton();
 
 		// next poll
 		form = new PollForm(getWebDriver());
-		form.selectAnswerForQuestion6("1", 9);
-		form.selectAnswerForQuestion7("3", 6);
-		form.selectAnswerForQuestion8(3, "3");
-		form.selectAnswerForQuestion9(6, "8");
+		for (int i = 0; i < 4; i++){
+			form.selectAnswerForQuestion6("" + i, i+1);
+			form.selectAnswerForQuestion7("" + i, i+2);
+		}
+		for (int i = 0; i < 4; i++) {
+			form.selectAnswerForQuestion8(i, "3");
+			form.selectAnswerForQuestion9(i, "1");
+		}
+		form.clickSubmitButton();
 
+		// result page
+		form = new PollForm(getWebDriver());
+		form.clickContinueButton();
+
+		// next poll
+		form = new PollForm(getWebDriver());
+		form.selectAnswerForQuestion10();
+		form.clickSubmitButton();
+
+		// result page
+		form = new PollForm(getWebDriver());
+		form.clickContinueButton();
+
+		// next poll
+		form = new PollForm(getWebDriver());
+		form.selectAnswerForQuestion11();
+		form.setAnswerForQusetion12("lalala");
+		form.clickSubmitButton();
+
+		// result page
+		form = new PollForm(getWebDriver());
+		form.clickContinueButton();
+
+		form = new PollForm(getWebDriver());
+		String actualMessage = form.getMessage();
+		String expectedMessage = "a really short message -thanks";
+
+		Assert.assertEquals(actualMessage,expectedMessage);
 	}
 
 
