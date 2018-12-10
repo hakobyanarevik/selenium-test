@@ -16,9 +16,9 @@ public class SeleniumPollTest extends SeleniumBaseTest {
 
 		// poll page
 		form = new PollForm(getWebDriver());
-		form.selectOptionsByIndex(2);
-		form.selectOptionInSelect("Ansver B");
-		form.selectImgByIndex(1);
+		form.selectAnswerForQuestion1And4ByIndex(2);
+		form.selectAnswerForQuestion2("Ansver B");
+		form.selectAnswerForQuestion3and5();
 		// click submit button
 		form.clickButton();
 
@@ -28,10 +28,10 @@ public class SeleniumPollTest extends SeleniumBaseTest {
 
 		// next poll
 		form = new PollForm(getWebDriver());
-		form.selectOptionsByIndex(2);
-		form.selectOptionsByIndex(1);
-		form.selectImgByIndex(1);
-		form.selectImgByIndex(2);
+		form.selectAnswerForQuestion1And4ByIndex(2);
+		form.selectAnswerForQuestion1And4ByIndex(1);
+		form.selectAnswerForQuestion3and5();
+		form.selectAnswerForQuestion3and5();
 		form.clickButton();
 
 		// result page
@@ -40,15 +40,10 @@ public class SeleniumPollTest extends SeleniumBaseTest {
 
 		// next poll
 		form = new PollForm(getWebDriver());
-
-
-
-
-
-
-
-
-
+		form.selectAnswerForQuestion6("1", 9);
+		form.selectAnswerForQuestion7("3", 6);
+		form.selectAnswerForQuestion8(3, "3");
+		form.selectAnswerForQuestion9(6, "8");
 
 	}
 
